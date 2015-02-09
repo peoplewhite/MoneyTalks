@@ -1,0 +1,20 @@
+<h1>History</h1>
+
+<div>
+	<h2>Year</h2>
+		<%= link_to("2014", yearly_moneys_path(year: 2014))%>
+		<%= link_to("2015", yearly_moneys_path(year: 2015))%>
+</div>
+
+<div>
+	<h2>Month</h2>
+	<%= link_to("01", monthly_moneys_path(month: 1))%>
+	<%= link_to("02", monthly_moneys_path(month: 2))%>
+	<%= link_to("03", monthly_moneys_path(month: 3))%>
+</div>
+
+<div>
+	<h2>Day</h2>
+	<%= link_to("4", daily_moneys_path(day: 4))%>
+</div>
+

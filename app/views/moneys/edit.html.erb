@@ -1,0 +1,41 @@
+<h1>EDIT</h1>
+
+<div><%= link_to("BACK", moneys_path) %></div>
+<br>
+
+	<%= form_for @money do |f| %>
+<div>
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+</div>
+<br>
+<div>
+	<%= f.label :description %>
+	<%= f.text_field :description %>
+</div>
+<br>
+<div>
+	<%= f.label :cost %>
+	<%= f.text_field :cost %>
+</div>
+<br>
+<div>
+	<%= f.label :feel %>
+	<%= f.radio_button :feel, 1 %>
+	<%= f.label "Good" %>
+	<%= f.radio_button :feel, 2 %>
+	<%= f.label "Bad" %>
+	<%= f.radio_button :feel, 3 %>
+	<%= f.label "soso" %>
+</div>
+<br>
+<div>
+	<%= f.label :paytype %>
+	<%= f.radio_button :feel, 1 %>
+	<%= f.label "Cash" %>
+	<%= f.radio_button :feel, 2 %>
+	<%= f.label "Card" %>
+</div>
+<br>
+  <%= f.submit "SUBMIT"%>
+  <% end %>

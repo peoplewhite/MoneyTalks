@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyText
+  description: MyString
+  cost: 1
+  feel: 1
+  paytype: 1
+
+two:
+  title: MyText
+  description: MyString
+  cost: 1
+  feel: 1
+  paytype: 1

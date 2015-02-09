@@ -1,0 +1,63 @@
+<h1>MoneyTalks</h1>
+<div><%= link_to("about me", about_me_moneys_path) %></div>
+<br><br>
+<div>
+	<!--登入與註冊-->
+	<% if current_user %>
+	Hello, <%= current_user.name %>
+	<br>
+	
+	<br>
+	<%= link_to("編輯帳號", edit_user_registration_path)%>
+	<%= link_to("登出", destroy_user_session_path, method: :delete)%>
+	<% else %>
+	<%= link_to("登入", new_user_session_path) %>
+	<%= link_to("註冊", new_user_registration_path) %>
+	<% end %>
+</div>
+<br><br>
+<div><%= link_to("新增消費", new_money_path) %></div>
+<div><%= link_to("歷史消費", sethistory_moneys_path)  %></div>
+<br>
+<div>
+	<table>
+		<thead>
+			<tr>
+				<td>#</td>
+				<td>日期</td>
+				<td>標題</td>
+				<td>消費金額</td>				
+				<td>敘述</td>
+				<td>心情</td>
+				<td>消費方式</td>
+			</tr>
+		</thead>
+		<tbody>
+			<% @moneys.each do |money| %>			
+			<tr>
+				<td>#</td>
+				<td><%= money.created_at.strftime("%Y/%m/%d") %></td>
+				<td><%= money.title %></td>d
+				<td>$<%= money.cost %></td>				
+				<td><%= money.description %></td>
+				<td>
+					<% if money.feel == 1 %>
+					<%=  "Good" %>
+					<% elsif money.feel == 2 %>
+					<%=  "Bad" %>
+					<% elsif money.feel == 3 %>
+					<%=  "soso" %>
+					<% else %>
+					<%=  "nothing"%>
+					<% end %>					
+				</td>
+				<td><%= money.paytype %></td>
+				<td><%= link_to("編輯", edit_money_path(money)) %></td>
+				<td><%= link_to("刪除", money_path(money), method: :delete, data:{confirm: "are you sure?"}) %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+<br><br>
+<div>總消費金額: $ <%= @today_sum %></div>
