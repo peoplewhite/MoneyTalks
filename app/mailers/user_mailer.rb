@@ -13,4 +13,10 @@ class UserMailer < ApplicationMailer
   	@user  = User.find(id)
     mail to: @user.email, subject: "Your password has changed"
   end
+
+  def confirm(email)
+    @message = "Thank you for confirmation!"
+    mail(:to => email, :subject => "Registered")
+  end
+
 end

@@ -1,5 +1,13 @@
 class MoneysController < ApplicationController
 	
+	def test_mail
+		UserMailer.confirm("shonshon7@gmail.com").deliver
+	end
+
+	def my_admin
+		@all_users = User.all
+	end
+
 	#按月份顯示
 	def monthly
 		@this_month = ('2015/0'+params[:month]+'/01').to_date
@@ -41,8 +49,17 @@ class MoneysController < ApplicationController
 	end
 
 	def index
-		@moneys = Money.all
-		@today_sum = singleday_sum
+		# @moneys = Money.all
+		# @today_sum = singleday_sum
+
+		if current_user != nil
+			@moneys = []
+			Money.where("customer_id = "+(current_user.id).to_s).find_each do |money|
+				@moneys.push(money)
+			end
+		end
+
+
 	end
 
 	def show
@@ -68,6 +85,8 @@ class MoneysController < ApplicationController
 	
 	def create
 		@money = Money.create(money_params)
+		@user_now = current_user
+		@money.customer_id = @user_now.id
 		if @money.save
 			redirect_to moneys_path
 		else
@@ -85,7 +104,7 @@ class MoneysController < ApplicationController
   def singleday_sum
   	sum2 = 0
   	@moneys.each do |money|
-  		sum2 += money.cost
+  		 sum2 += money.cost
   	end
   	sum2
   end

@@ -6,6 +6,9 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+
+
+
 module MT
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -22,5 +25,18 @@ module MT
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = 
+    {
+      address:              'smtp.gmail.com',
+      port:                 587,
+      domain:               'gmail.com',
+      # user_name:            'shonshon7@gmail.com',
+      user_name:            'shonshon7',
+      password:             'qweioppoiewq',
+      authentication:       'plain',
+      enable_starttls_auto: true  
+    }
+
   end
 end

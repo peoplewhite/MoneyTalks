@@ -1,0 +1,72 @@
+<h1>Backstage</h1>
+
+<div>
+	<%= link_to("會員管理","#")%>
+	<%#= link_to("","#")%>
+
+</div>
+
+<br><br><br>
+<div>
+	<table>
+		<thead>
+			<tr>
+				<td>#</td>
+				<td>name</td>
+				<td>email</td>
+				<td>權限</td>
+				<td>狀態</td>
+				<!-- <td>消費金額</td>				
+				<td>敘述</td>
+				<td>心情</td>
+				<td>消費方式</td> -->
+			</tr>
+		</thead>
+		<tbody>
+			<% @all_users.each do |user| %>			
+			<tr>
+				<td><%= user.id %></td>
+				<td><%= user.name %></td>
+				<td><%= user.email %></td>
+				<td>
+					<% if user.using_level == 0 %>
+					一般
+					<% elsif user.using_level == 1 %>
+					管理者
+					<% end %>
+				</td>
+					<td>
+					<% if user.is_accessible %>
+					正常
+					<% else %>
+					鎖定
+					<% end %>
+				</td>
+				<td><%= link_to("檢視", "#") %></td>
+				<td>
+					<% if user.is_accessible %>
+					<%= link_to("鎖定", "#") %>
+					<% else %>
+					<%= link_to("解鎖", "#") %>
+					<% end %>
+				</td>
+				<td><%= link_to("權限", "#") %></td>
+				<td><%= link_to("刪除", "#") %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+
+<%
+
+# A. 管理者也是一種使用者，登入後能夠進入管理介面
+# B. 管理者能夠管理使用者
+# 管理者能夠檢視所有使用者資訊（Email, … etc)
+# 管理者能夠搜尋使用者 (Email … etc)
+# 管理者鎖定/解鎖使用者
+# C. 管理者能夠檢視消費記錄和報表
+# 管理者能夠檢視某位使用者的消費記錄
+# 管理者能夠檢視某位使用者的統計報表：顯示收支、並以圖形化顯示方式
+
+%>

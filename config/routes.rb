@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
   resources :moneys do
     collection do 
-      get :monthly, :yearly, :daily, :sethistory, :about_me
+      get :monthly, :yearly, :daily, :sethistory, :about_me, :test_mail, :my_admin
+    
       # post 
     end
 

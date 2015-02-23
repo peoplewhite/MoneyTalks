@@ -11,16 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150128173155) do
+ActiveRecord::Schema.define(version: 20150216154050) do
 
   create_table "money", force: :cascade do |t|
     t.text     "title"
     t.string   "description"
-    t.integer  "cost"
+    t.integer  "cost", null: false 
     t.integer  "feel"
     t.integer  "paytype"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "customer_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -36,7 +37,9 @@ ActiveRecord::Schema.define(version: 20150128173155) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name", default:"TEST", null: false
+    t.string   "name"             
+    t.integer  "using_level", default: 0, null: false  #使用者權限 0:一般使用者 1:管理者
+    t.boolean  "is_accessible", default: true, null: false  #可控制使用者可否使用
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -4,10 +4,16 @@
 <div>
 	<!--登入與註冊-->
 	<% if current_user %>
-	Hello, <%= current_user.name %>
+	<% if current_user.using_level == 0 %>
+	Hello, <%= current_user.name %>[Normal]
+	<% elsif current_user.using_level == 1 %>
+	Hello, <%= current_user.name %>[Manager]
+	<%= link_to("進入後台", my_admin_moneys_path)%>
+	<% end %>
 	<br>
-	
+
 	<br>
+	<%= link_to("測試寄信", test_mail_moneys_path)%>
 	<%= link_to("編輯帳號", edit_user_registration_path)%>
 	<%= link_to("登出", destroy_user_session_path, method: :delete)%>
 	<% else %>
@@ -16,6 +22,8 @@
 	<% end %>
 </div>
 <br><br>
+
+<% if current_user %>
 <div><%= link_to("新增消費", new_money_path) %></div>
 <div><%= link_to("歷史消費", sethistory_moneys_path)  %></div>
 <br>
@@ -37,7 +45,7 @@
 			<tr>
 				<td>#</td>
 				<td><%= money.created_at.strftime("%Y/%m/%d") %></td>
-				<td><%= money.title %></td>d
+				<td><%= money.title %></td>
 				<td>$<%= money.cost %></td>				
 				<td><%= money.description %></td>
 				<td>
@@ -51,7 +59,14 @@
 					<%=  "nothing"%>
 					<% end %>					
 				</td>
-				<td><%= money.paytype %></td>
+				<td>
+					<% if money.paytype == 1%>
+					<%= "Cash" %>
+					<% else %>
+					<%= "other" %>
+					<% end %>
+					
+				</td>
 				<td><%= link_to("編輯", edit_money_path(money)) %></td>
 				<td><%= link_to("刪除", money_path(money), method: :delete, data:{confirm: "are you sure?"}) %></td>
 			</tr>
@@ -60,4 +75,13 @@
 	</table>
 </div>
 <br><br>
-<div>總消費金額: $ <%= @today_sum %></div>
+<div>總消費金額: $ <%#= @today_sum %></div>
+
+
+<div>
+	<%#= line_chart Money.group_by_day(:created_at).count %>
+</div>
+
+<% else %>
+Welcome
+<% end %>
