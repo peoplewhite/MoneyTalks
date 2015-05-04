@@ -15,19 +15,19 @@
 				<td>#</td>
 				<td>日期</td>
 				<td>標題</td>
-				<td>消費金額</td>				
+				<td>消費金額</td>
 				<td>敘述</td>
 				<td>心情</td>
 				<td>消費方式</td>
 			</tr>
 		</thead>
 		<tbody>
-			<% @yearly_costs.each do |money| %>			
+			<% @yearly_costs.each do |money| %>
 			<tr>
 				<td>#</td>
 				<td><%= money.created_at.strftime("%Y/%m/%d") %></td>
-				<td><%= money.title %></td>d
-				<td>$<%= money.cost %></td>				
+				<td><%= money.title %></td>
+				<td>$<%= money.cost %></td>
 				<td><%= money.description %></td>
 				<td>
 					<% if money.feel == 1 %>
@@ -38,7 +38,7 @@
 					<%=  "soso" %>
 					<% else %>
 					<%=  "nothing"%>
-					<% end %>					
+					<% end %>
 				</td>
 				<td><%= money.paytype %></td>
 				<td><%= link_to("編輯", edit_money_path(money)) %></td>
